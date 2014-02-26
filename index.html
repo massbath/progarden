@@ -16,6 +16,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-resource.min.js"></script>
 <script
@@ -85,11 +86,24 @@
 	
 <footer>
 <script>
-	$ie = (navigator.userAgent.indexOf('MSIE'))?1:0;
-	if($ie){
+	$ie = ie_ver();
+	if($ie != 0){
 		$messageIE = document.getElementById("messageIE");
-		$messageIE.innerHTML = "<div class='row col-md-12'><h1><p>Internet Explorer ne supporte pas les fonctionnalités de ce site.<br> Vous pouvez utiliser <a href='http://www.mozilla.org/fr/firefox/fx/#desktop'>Mozilla Firefox</a>, <a href='https://www.google.com/intl/fr_fr/chrome/browser/'>ou Google Chrome</a></p></h1></div>";
+		$messageIE.innerHTML = "<h1><p>Internet Explorer ne supporte pas les fonctionnalités de ce site.<br> Vous pouvez utiliser <a href='http://www.mozilla.org/fr/firefox/fx/#desktop'>Mozilla Firefox</a>, <a href='https://www.google.com/intl/fr_fr/chrome/browser/'>ou Google Chrome</a></p></h1>";
 	}
+	
+	function ie_ver(){  
+    var iev=0;
+    var ieold = (/MSIE (\d+\.\d+);/.test(navigator.userAgent));
+    var trident = !!navigator.userAgent.match(/Trident\/7.0/);
+    var rv=navigator.userAgent.indexOf("rv:11.0");
+
+    if (ieold) iev=new Number(RegExp.$1);
+    if (navigator.appVersion.indexOf("MSIE 10") != -1) iev=10;
+    if (trident&&rv!=-1) iev=11;
+
+    return iev;         
+}
 </script>
 </footer>
 </body
